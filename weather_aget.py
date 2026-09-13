@@ -38,5 +38,22 @@ def get_weather_data(city: str) -> str:
     response.raise_for_status()
     
     data = response.json()
+    
+    # weatherstack can return api level error 
+    if "error" in data:
+      return f"Weather API error: {data['error']}"
+    
+    # extract useful information
+    location = data.get("location", {})
+    current = data.get("current", {})
+
+    city_name = location.get("name", city)
+    country = location.get("country", "")
+
+    temperature = current.get("temperature")
+    feels_like = current.get("feelslike")
+    humidity = current.get("humidity")
+    wind_speed = current.get("wind_speed")
+    description = current.get("weather_descriptions", ["Unknown"])[0]
   except:
     pass 
