@@ -77,3 +77,12 @@ def get_weather_data(city: str) -> str:
   
   except Exception as e:
     return f"Unexpected error while getting weather: {e}"
+  
+  # create google gemini model
+  llm = ChatGoogleGenerativeAI(
+    model="gemini-3.8-flash",
+    temperature=0,
+    google_api_key=GEMINI_API_KEY
+  )
+  
+  
