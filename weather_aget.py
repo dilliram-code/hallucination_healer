@@ -67,5 +67,13 @@ def get_weather_data(city: str) -> str:
         )
 
     return result
-  except:
-    pass 
+  
+  # except block
+  except requests.exceptions.Timeout:
+    return "Weather API request timed out."
+  
+  except requests.exceptions.RequestException as e:
+    return f"Weather API request failed: {e}"
+  
+  except Exception as e:
+    return f"Unexpected error while getting weather: {e}"
