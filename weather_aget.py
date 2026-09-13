@@ -6,6 +6,8 @@ from langchain.agents import create_agent
 from langchain_core.tools import tool 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+load_dotenv()
+
 # load env varialbes
 GEMINI_API_KEY=os.getenv("GEMINI_API_KEY")
 WEATHER_API_KEY=os.getenv("WEATHER_API_KEY")
@@ -19,7 +21,16 @@ if not WEATHER_API_KEY:
 # create the weather tool
 @tool
 def get_weather_data(city: str) -> str:
-  
+  """
+    Fetches the current weather data for a given city.
+
+    Args:
+        city: Name of the city, for example Kathmandu or Tokyo.
+
+    Returns:
+        Current weather information as a string.
+  """
+
   url = "https://api.weatherstack.com/current"
   
   params = {
