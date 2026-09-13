@@ -103,3 +103,20 @@ agent = create_agent(
     "to the user."
   )
 )
+
+# run the agent
+if __name__ == "__main__":
+  user_input = input("You:")
+  result = agent.invoke(
+    {
+      "messages": [
+      { 
+        "role": "user",
+        "content": user_input
+        }
+      ]
+    }
+  )
+  
+  # print the result
+  print("Agent:", result["messages"][-1].content)
