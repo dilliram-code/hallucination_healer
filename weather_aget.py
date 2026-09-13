@@ -17,3 +17,26 @@ if not WEATHER_API_KEY:
   raise ValueError("WEATHER_API_KEY is missing from .env")
 
 # create the weather tool
+@tool
+def get_weather_data(city: str) -> str:
+  
+  url = "https://api.weatherstack.com/current"
+  
+  params = {
+    "access_key": WEATHER_API_KEY,
+    "query": city
+  }
+  
+  try:
+    response = requests.get(
+      url,
+      params,
+      timeout=10
+    )
+    
+    # raise an error for HTTPException
+    response.raise_for_status()
+    
+    data = response.json()
+  except:
+    pass 
