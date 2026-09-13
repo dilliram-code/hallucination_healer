@@ -79,10 +79,27 @@ def get_weather_data(city: str) -> str:
     return f"Unexpected error while getting weather: {e}"
   
   # create google gemini model
-  llm = ChatGoogleGenerativeAI(
+llm = ChatGoogleGenerativeAI(
     model="gemini-3.8-flash",
     temperature=0,
     google_api_key=GEMINI_API_KEY
+)
+  
+# register tools 
+tools = [
+  get_weather_data
+]
+
+# create the agent
+agent = create_agent(
+  model=llm,
+  tools=tools,
+  system_prompt=(
+    "You are a helpful weather assistant. "
+    "When the user asks about current weather, "
+    "always use the get_weather_data tool. "
+    "Do not guess weather information. "
+    "After receiving the tool result, explain it clearly "
+    "to the user."
   )
-  
-  
+)
