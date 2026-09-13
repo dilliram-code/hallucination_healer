@@ -55,5 +55,17 @@ def get_weather_data(city: str) -> str:
     humidity = current.get("humidity")
     wind_speed = current.get("wind_speed")
     description = current.get("weather_descriptions", ["Unknown"])[0]
+    
+    # return result
+    result = (
+            f"Weather in {city_name}, {country}:\n"
+            f"Condition: {description}\n"
+            f"Temperature: {temperature}°C\n"
+            f"Feels like: {feels_like}°C\n"
+            f"Humidity: {humidity}%\n"
+            f"Wind speed: {wind_speed} km/h"
+        )
+
+    return result
   except:
     pass 
