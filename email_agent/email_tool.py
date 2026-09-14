@@ -59,3 +59,6 @@ def send_email(
             server.send_message(message)
 
         return f"Email successfully sent to {recipient}"
+      
+    except Exception as e:
+        return f"Failed to send email: {str(e)}"
