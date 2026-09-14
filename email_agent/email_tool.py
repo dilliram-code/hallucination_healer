@@ -40,3 +40,22 @@ def send_email(
     message["Subject"] = subject
 
     message.set_content(body)
+    
+    try:
+
+        # Connect to Gmail SMTP server
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+
+            # Upgrade connection to encrypted TLS
+            server.starttls()
+
+            # Login
+            server.login(
+                EMAIL_ADDRESS,
+                EMAIL_APP_PASSWORD
+            )
+
+            # Send email
+            server.send_message(message)
+
+        return f"Email successfully sent to {recipient}"
