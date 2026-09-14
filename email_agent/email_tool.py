@@ -4,9 +4,39 @@ import smtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv
 
-
 load_dotenv()
-
 
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
+
+def send_email(
+    recipient: str,
+    subject: str,
+    body: str
+) -> str:
+    """
+    Send an email using Gmail SMTP.
+
+    Args:
+        recipient: Email address of the recipient.
+        subject: Subject of the email.
+        body: Full email body.
+
+    Returns:
+        A message describing whether the email was sent.
+    """
+
+    if not EMAIL_ADDRESS:
+        return "Error: EMAIL_ADDRESS is not configured."
+
+    if not EMAIL_APP_PASSWORD:
+        return "Error: EMAIL_APP_PASSWORD is not configured."
+
+    # Create the email
+    message = EmailMessage()
+
+    message["From"] = EMAIL_ADDRESS
+    message["To"] = recipient
+    message["Subject"] = subject
+
+    message.set_content(body)
