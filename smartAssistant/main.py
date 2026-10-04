@@ -5,22 +5,30 @@ def main():
 
     assistant = Assistant()
 
-    print("Smart Assistant")
-    print("Type 'exit' to quit.")
+    print("=" * 40)
+    print("       SMART ASSISTANT")
+    print("=" * 40)
+
+    print("Available examples:")
+    print("- What is the time?")
+    print("- Calculate 10 + 20")
+    print("- Show student information")
+    print("- What is Python?")
+    print("- Type 'exit' to quit.")
 
     while True:
 
         user_input = input("\nYou: ")
 
         if user_input.lower() == "exit":
-            print("Goodbye!")
+            print("Assistant: Goodbye!")
             break
 
         response = assistant.respond_to_user(
             user_input
         )
 
-        print("Assistant:", response)
+        print(f"Assistant: {response}")
 
 
 if __name__ == "__main__":
