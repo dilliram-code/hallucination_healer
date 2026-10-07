@@ -17,3 +17,8 @@ def generate_password(length=12):
   )
   
   return password
+
+def roll_dice():
+  """Roll a six-sided dice."""
+  
+  return random.randint(1,6)
